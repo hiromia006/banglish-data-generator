@@ -1,0 +1,92 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
+
+group = 'com.hiromia'
+version = '1.0.0'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+    withSourcesJar()
+    withJavadocJar()
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.testng:testng:7.10.2'
+}
+
+tasks.named('test') {
+    useTestNG()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(Javadoc).configureEach {
+    options.encoding = 'UTF-8'
+    options.addStringOption('Xdoclint:none', '-quiet')
+}
+
+jar {
+    manifest {
+        attributes(
+            'Implementation-Title': 'Banglish Data Generator',
+            'Implementation-Version': project.version,
+            'Main-Class': 'com.hiromia.banglish.Main'
+        )
+    }
+}
+
+tasks.register('run', JavaExec) {
+    group = 'application'
+    description = 'Runs the demo application showing sample Banglish data.'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.hiromia.banglish.Main'
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            pom {
+                name = 'Banglish Data Generator'
+                description = 'A lightweight Java library for generating natural Banglish text and synthetic Bangladesh-specific test data.'
+                url = 'https://github.com/hiromia/banglish-data-generator'
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'hiromia'
+                        name = 'Hiromia Team'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/hiromia/banglish-data-generator.git'
+                    developerConnection = 'scm:git:ssh://github.com:hiromia/banglish-data-generator.git'
+                    url = 'https://github.com/hiromia/banglish-data-generator'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            name = 'LocalBuildRepo'
+            url = layout.buildDirectory.dir('repo')
+        }
+    }
+}

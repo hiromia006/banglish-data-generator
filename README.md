@@ -13,7 +13,7 @@ Built specifically for QA automation engineers, software developers, API test pa
 ## Features
 
 - **Banglish Text Generation**: Produces natural-sounding Banglish words, sentences, titles, and paragraphs using Roman characters.
-- **Bangladeshi Names**: Generates authentic-style Bangladeshi male and female first names, last names, and full names.
+- **Bangladeshi Names**: Generates authentic-style Bangladeshi male and female first names, last names, and full names from a curated dataset of 500 male first names, 500 female first names, and 500 surnames.
 - **Mobile Number Generation**: Generates 11-digit local (`01XXXXXXXXX`) and international (`+8801XXXXXXXXX`) phone numbers with validated operator prefixes (`013`, `014`, `015`, `016`, `017`, `018`, `019`).
 - **Verified Postal Codes**: Four-digit postal codes verified from official Bangladesh Post Office records across all 64 districts.
 - **Administrative Location Data**: Complete coverage of all 8 divisions, 64 districts, and major cities/localities with hierarchical filtering.

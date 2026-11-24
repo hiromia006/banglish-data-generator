@@ -71,4 +71,31 @@ public class NameGeneratorTest {
             assertTrue(BangladeshiNames.LAST_NAMES.contains(parts[1]));
         }
     }
+
+    @Test(description = "Verify dataset sizes, uniqueness, and format")
+    public void testDatasetSizesAndUniqueness() {
+        assertEquals(BangladeshiNames.MALE_FIRST_NAMES.size(), 500);
+        assertEquals(BangladeshiNames.FEMALE_FIRST_NAMES.size(), 500);
+        assertEquals(BangladeshiNames.LAST_NAMES.size(), 500);
+
+        assertEquals(new java.util.HashSet<>(BangladeshiNames.MALE_FIRST_NAMES).size(), 500);
+        assertEquals(new java.util.HashSet<>(BangladeshiNames.FEMALE_FIRST_NAMES).size(), 500);
+        assertEquals(new java.util.HashSet<>(BangladeshiNames.LAST_NAMES).size(), 500);
+
+        for (String name : BangladeshiNames.MALE_FIRST_NAMES) {
+            assertNotNull(name);
+            assertFalse(name.isBlank());
+            assertTrue(Character.isUpperCase(name.charAt(0)));
+        }
+        for (String name : BangladeshiNames.FEMALE_FIRST_NAMES) {
+            assertNotNull(name);
+            assertFalse(name.isBlank());
+            assertTrue(Character.isUpperCase(name.charAt(0)));
+        }
+        for (String name : BangladeshiNames.LAST_NAMES) {
+            assertNotNull(name);
+            assertFalse(name.isBlank());
+            assertTrue(Character.isUpperCase(name.charAt(0)));
+        }
+    }
 }

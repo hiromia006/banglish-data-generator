@@ -69,7 +69,10 @@ Validation rules:
 
 ### 2. Bangladeshi name generation
 
-Implemented in `NameGenerator.java`:
+Implemented in `NameGenerator.java` using curated dataset in `BangladeshiNames.java`:
+- 500 unique Bangladeshi male first names (`MALE_FIRST_NAMES`)
+- 500 unique Bangladeshi female first names (`FEMALE_FIRST_NAMES`)
+- 500 unique Bangladeshi family surnames (`LAST_NAMES`)
 
 - `getName()` : Returns full name (male or female).
 - `getFirstName()` : Returns common first name.

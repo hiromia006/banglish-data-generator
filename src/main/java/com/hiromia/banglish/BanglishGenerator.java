@@ -1,5 +1,7 @@
 package com.hiromia.banglish;
 
+import com.hiromia.banglish.model.CitizenIdentification;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
@@ -28,6 +30,7 @@ public class BanglishGenerator implements Banglish {
     private final PhoneGenerator phoneGenerator;
     private final PostalCodeGenerator postalCodeGenerator;
     private final LocationGenerator locationGenerator;
+    private final IdentificationGenerator identificationGenerator;
 
     /**
      * Returns the shared, thread-safe default instance of {@link Banglish}.
@@ -76,6 +79,7 @@ public class BanglishGenerator implements Banglish {
         this.phoneGenerator = new PhoneGenerator(random);
         this.postalCodeGenerator = new PostalCodeGenerator(random);
         this.locationGenerator = new LocationGenerator(random);
+        this.identificationGenerator = new IdentificationGenerator(random);
     }
 
     // =========================================================================
@@ -231,5 +235,99 @@ public class BanglishGenerator implements Banglish {
     @Override
     public List<String> getCitiesByDistrict(String district) {
         return locationGenerator.getCitiesByDistrict(district);
+    }
+
+    // =========================================================================
+    // Citizen Identification & Document Generation
+    // =========================================================================
+
+    @Override
+    public String getNationalIdNumber() {
+        return identificationGenerator.getNationalIdNumber();
+    }
+
+    @Override
+    public String getNationalIdNumber(int length) {
+        return identificationGenerator.getNationalIdNumber(length);
+    }
+
+    @Override
+    public String getNationalVoterNo() {
+        return identificationGenerator.getNationalVoterNo();
+    }
+
+    @Override
+    public String getNationalVoterNo(int length) {
+        return identificationGenerator.getNationalVoterNo(length);
+    }
+
+    @Override
+    public String getBirthRegistrationNumber() {
+        return identificationGenerator.getBirthRegistrationNumber();
+    }
+
+    @Override
+    public String getJonmnibondonNo() {
+        return identificationGenerator.getJonmnibondonNo();
+    }
+
+    @Override
+    public String getSmartCardNumber() {
+        return identificationGenerator.getSmartCardNumber();
+    }
+
+    @Override
+    public String getSmartCardNo() {
+        return identificationGenerator.getSmartCardNo();
+    }
+
+    @Override
+    public String getPassportNumber() {
+        return identificationGenerator.getPassportNumber();
+    }
+
+    @Override
+    public String getPassportNumber(char series) {
+        return identificationGenerator.getPassportNumber(series);
+    }
+
+    @Override
+    public String getPassportNumber(String series) {
+        return identificationGenerator.getPassportNumber(series);
+    }
+
+    @Override
+    public String getPassordNo() {
+        return identificationGenerator.getPassordNo();
+    }
+
+    @Override
+    public String getDrivingLicenseNumber() {
+        return identificationGenerator.getDrivingLicenseNumber();
+    }
+
+    @Override
+    public String getDrivingLicenseNumber(String circleCode) {
+        return identificationGenerator.getDrivingLicenseNumber(circleCode);
+    }
+
+    @Override
+    public String getDrivingLincenceId() {
+        return identificationGenerator.getDrivingLincenceId();
+    }
+
+    @Override
+    public String getDrivingLicenseId() {
+        return identificationGenerator.getDrivingLicenseId();
+    }
+
+    @Override
+    public CitizenIdentification getCitizenIdentification() {
+        return identificationGenerator.getCitizenIdentification();
+    }
+
+    @Override
+    public CitizenIdentification getIdentification() {
+        return identificationGenerator.getCitizenIdentification();
     }
 }

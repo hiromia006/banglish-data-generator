@@ -1,5 +1,7 @@
 package com.hiromia.banglish;
 
+import com.hiromia.banglish.model.CitizenIdentification;
+
 import java.util.List;
 
 /**
@@ -251,4 +253,149 @@ public interface Banglish {
      * @throws IllegalArgumentException if the district is unrecognized
      */
     List<String> getCitiesByDistrict(String district);
+
+    // =========================================================================
+    // 6. Bangladesh Citizen Identification & Document Generation
+    // =========================================================================
+
+    /**
+     * Generates a standard 17-digit Bangladesh National ID (NID) number
+     * (standardized field name: {@code nationalIdNumber}).
+     *
+     * @return 17-digit National ID number string
+     */
+    String getNationalIdNumber();
+
+    /**
+     * Generates a Bangladesh National ID number with the specified digit length (10, 13, or 17 digits).
+     *
+     * @param length digit length (10, 13, or 17)
+     * @return National ID number string of the specified length
+     * @throws IllegalArgumentException if length is not 10, 13, or 17
+     */
+    String getNationalIdNumber(int length);
+
+    /**
+     * Alias for {@link #getNationalIdNumber()} using the legacy field name {@code nationalVoterNo}.
+     *
+     * @return 17-digit National ID number string
+     */
+    String getNationalVoterNo();
+
+    /**
+     * Alias for {@link #getNationalIdNumber(int)} using the legacy field name {@code nationalVoterNo}.
+     *
+     * @param length digit length (10, 13, or 17)
+     * @return National ID number string
+     */
+    String getNationalVoterNo(int length);
+
+    /**
+     * Generates a standard 17-digit Bangladesh Birth Registration Number (BRN / Jonmo Nibondhon No)
+     * (standardized field name: {@code birthRegistrationNumber}).
+     *
+     * @return 17-digit birth registration number string
+     */
+    String getBirthRegistrationNumber();
+
+    /**
+     * Alias for {@link #getBirthRegistrationNumber()} using the legacy field name {@code JonmnibondonNo}.
+     *
+     * @return 17-digit birth registration number string
+     */
+    String getJonmnibondonNo();
+
+    /**
+     * Generates a 10-digit Bangladesh Smart NID Card Number
+     * (standardized field name: {@code smartCardNumber}).
+     *
+     * @return 10-digit Smart NID card number string
+     */
+    String getSmartCardNumber();
+
+    /**
+     * Alias for {@link #getSmartCardNumber()} using the legacy field name {@code smartCardNo}.
+     *
+     * @return 10-digit Smart NID card number string
+     */
+    String getSmartCardNo();
+
+    /**
+     * Generates a 9-character Bangladesh Passport Number (Machine Readable Passport or e-Passport)
+     * (standardized field name: {@code passportNumber}).
+     *
+     * @return 9-character passport number string
+     */
+    String getPassportNumber();
+
+    /**
+     * Generates a 9-character Bangladesh Passport Number with the specified series character.
+     *
+     * @param series series letter (e.g. 'A', 'B', 'E', 'P', 'D')
+     * @return 9-character passport number string
+     * @throws IllegalArgumentException if series is not an alphabetic letter
+     */
+    String getPassportNumber(char series);
+
+    /**
+     * Generates a 9-character Bangladesh Passport Number with the specified series prefix.
+     *
+     * @param series single-character series string (e.g. "A", "B", "E")
+     * @return 9-character passport number string
+     * @throws IllegalArgumentException if series is null, blank, or not a single alphabetic letter
+     */
+    String getPassportNumber(String series);
+
+    /**
+     * Alias for {@link #getPassportNumber()} using the legacy field name {@code passordNo}.
+     *
+     * @return 9-character passport number string
+     */
+    String getPassordNo();
+
+    /**
+     * Generates a standard BRTA Driving Licence Number
+     * (standardized field name: {@code drivingLicenseNumber}).
+     *
+     * @return 9-character BRTA driving licence number string (2-letter circle code + 7 digits)
+     */
+    String getDrivingLicenseNumber();
+
+    /**
+     * Generates a standard BRTA Driving Licence Number for the specified 2-letter circle code.
+     *
+     * @param circleCode 2-letter BRTA circle code (e.g. "DK", "CT", "SY")
+     * @return 9-character BRTA driving licence number string
+     * @throws IllegalArgumentException if circleCode is null or not a 2-letter alphabetic string
+     */
+    String getDrivingLicenseNumber(String circleCode);
+
+    /**
+     * Alias for {@link #getDrivingLicenseNumber()} using the legacy field name {@code driving lincenceId}.
+     *
+     * @return 9-character BRTA driving licence number string
+     */
+    String getDrivingLincenceId();
+
+    /**
+     * Alias for {@link #getDrivingLicenseNumber()}.
+     *
+     * @return 9-character BRTA driving licence number string
+     */
+    String getDrivingLicenseId();
+
+    /**
+     * Generates a complete {@link CitizenIdentification} record with all standardized
+     * identification and document numbers.
+     *
+     * @return citizen identification record
+     */
+    CitizenIdentification getCitizenIdentification();
+
+    /**
+     * Convenient alias for {@link #getCitizenIdentification()}.
+     *
+     * @return citizen identification record
+     */
+    CitizenIdentification getIdentification();
 }

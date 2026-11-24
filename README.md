@@ -17,6 +17,7 @@ Built specifically for QA automation engineers, software developers, API test pa
 - **Mobile Number Generation**: Generates 11-digit local (`01XXXXXXXXX`) and international (`+8801XXXXXXXXX`) phone numbers with validated operator prefixes (`013`, `014`, `015`, `016`, `017`, `018`, `019`).
 - **Verified Postal Codes**: Four-digit postal codes verified from official Bangladesh Post Office records across all 64 districts.
 - **Administrative Location Data**: Complete coverage of all 8 divisions, 64 districts, and major cities/localities with hierarchical filtering.
+- **Citizen Identification & Documents**: Standardized generators for National ID (NID, 17/13/10 digits), Birth Registration (17 digits), Smart NID Card (10 digits), Bangladesh Passport (9 chars), and BRTA Driving Licence (9 chars).
 - **Zero Runtime Dependencies**: Ultra-lightweight footprint with zero external runtime dependencies.
 - **Thread-Safe & Deterministic**: Safe for concurrent test execution and supports configurable seeds for reproducible test runs.
 - **Dual Build Support**: Fully configured for both Gradle and Maven.
@@ -85,6 +86,13 @@ public class QuickStart {
         String district = banglish.getDistrict();               // e.g. "Bogura"
         String division = banglish.getDivision();               // e.g. "Rajshahi"
         String country = banglish.getCountry();                 // "Bangladesh"
+
+        // Citizen Identification & Document Numbers (Standardized Field Names)
+        String nid = banglish.getNationalIdNumber();             // e.g. "19881234567890123" (17 digits)
+        String brn = banglish.getBirthRegistrationNumber();      // e.g. "19952601011234567" (17 digits)
+        String smartCard = banglish.getSmartCardNumber();        // e.g. "1928374650" (10 digits)
+        String passport = banglish.getPassportNumber();          // e.g. "A01234567" (9 characters)
+        String drivingLicence = banglish.getDrivingLicenseNumber(); // e.g. "DK1234567" (9 characters)
     }
 }
 ```
@@ -178,6 +186,56 @@ List<String> dhakaDistricts = banglish.getDistrictsByDivision("Dhaka");
 // Filter cities by district
 String cityInBogura = banglish.getCity("Bogura");
 List<String> citiesInDhaka = banglish.getCitiesByDistrict("Dhaka");
+```
+
+### 6. Bangladesh Citizen Identification & Document Numbers
+
+Generates standardized and authentic synthetic identification numbers and official government document formats for QA automation, payload testing, and database seeding.
+
+#### Standardized Field Mapping
+
+| Your field name | Recommended Java field name | Description | Format / Specification |
+|---|---|---|---|
+| `nationalVoterNo` | `nationalIdNumber` | National ID (NID) Number | 17 digits (computerized: `YYYY` + 13d), 13 digits, or 10 digits |
+| `JonmnibondonNo` | `birthRegistrationNumber` | Birth Registration Number | 17 digits (BDRIS format: `YYYY` + 2d geo + 2d upazila + 2d union + 7d serial) |
+| `smartCardNo` | `smartCardNumber` | Smart NID Card Number | 10 digits (first digit 1–9, followed by 9 digits) |
+| `passordNo` | `passportNumber` | Bangladesh Passport Number | 9 characters (1 uppercase series letter + 8 digits) |
+| `driving lincenceId` | `drivingLicenseNumber` | BRTA Driving Licence Number | 9 characters (2-letter circle code + 7 digits) |
+
+```java
+Banglish banglish = BanglishGenerator.getInstance();
+
+// 1. National ID (NID) Number
+String nid17 = banglish.getNationalIdNumber();       // e.g. "19881234567890123" (17 digits)
+String nid10 = banglish.getNationalIdNumber(10);     // e.g. "1928374650" (10 digits)
+String nid13 = banglish.getNationalIdNumber(13);     // e.g. "1234567890123" (13 digits)
+String voterNo = banglish.getNationalVoterNo();      // alias for getNationalIdNumber()
+
+// 2. Birth Registration Number
+String brn = banglish.getBirthRegistrationNumber();  // e.g. "19952601011234567" (17 digits)
+String jonmoNo = banglish.getJonmnibondonNo();       // alias for getBirthRegistrationNumber()
+
+// 3. Smart NID Card Number
+String smartCard = banglish.getSmartCardNumber();    // e.g. "1928374650" (10 digits)
+String smartCardAlias = banglish.getSmartCardNo();   // alias for getSmartCardNumber()
+
+// 4. Bangladesh Passport Number
+String passport = banglish.getPassportNumber();      // e.g. "A01234567" (9 characters)
+String offPassport = banglish.getPassportNumber('E');// e.g. "E01234567" (Official)
+String passAlias = banglish.getPassordNo();          // alias for getPassportNumber()
+
+// 5. BRTA Driving Licence Number
+String licence = banglish.getDrivingLicenseNumber(); // e.g. "DK1234567" (9 characters)
+String dhakaLicence = banglish.getDrivingLicenseNumber("DK"); // Dhaka circle
+String dlAlias = banglish.getDrivingLincenceId();    // alias for getDrivingLicenseNumber()
+
+// 6. CitizenIdentification POJO
+CitizenIdentification citizen = banglish.getCitizenIdentification();
+System.out.println(citizen.getNationalIdNumber());
+System.out.println(citizen.getBirthRegistrationNumber());
+System.out.println(citizen.getSmartCardNumber());
+System.out.println(citizen.getPassportNumber());
+System.out.println(citizen.getDrivingLicenseNumber());
 ```
 
 ---
@@ -285,6 +343,11 @@ Division:        Chattogram
 District:        Cox's Bazar
 City:            Teknaf
 Country:         Bangladesh
+National ID:     19840443056966558
+Birth Reg No:    20015711267684637
+Smart Card No:   2404229740
+Passport No:     A59382716
+Driving Licence: DK0368352
 ```
 
 ---

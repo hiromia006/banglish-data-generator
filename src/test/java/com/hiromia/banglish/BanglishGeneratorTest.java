@@ -29,6 +29,11 @@ public class BanglishGeneratorTest {
         assertEquals(gen1.getCity(), gen2.getCity());
         assertEquals(gen1.getDistrict(), gen2.getDistrict());
         assertEquals(gen1.getDivision(), gen2.getDivision());
+        assertEquals(gen1.getNationalIdNumber(), gen2.getNationalIdNumber());
+        assertEquals(gen1.getBirthRegistrationNumber(), gen2.getBirthRegistrationNumber());
+        assertEquals(gen1.getSmartCardNumber(), gen2.getSmartCardNumber());
+        assertEquals(gen1.getPassportNumber(), gen2.getPassportNumber());
+        assertEquals(gen1.getDrivingLicenseNumber(), gen2.getDrivingLicenseNumber());
     }
 
     @Test(description = "Facade methods produce expected non-null and formatted data")
@@ -69,5 +74,35 @@ public class BanglishGeneratorTest {
         assertFalse(banglish.getDistrictsByDivision("Dhaka").isEmpty());
         assertNotNull(banglish.getCity("Dhaka"));
         assertFalse(banglish.getCitiesByDistrict("Dhaka").isEmpty());
+
+        // Identification & Document Numbers
+        assertNotNull(banglish.getNationalIdNumber());
+        assertEquals(banglish.getNationalIdNumber().length(), 17);
+        assertEquals(banglish.getNationalIdNumber(10).length(), 10);
+        assertEquals(banglish.getNationalIdNumber(13).length(), 13);
+        assertEquals(banglish.getNationalVoterNo().length(), 17);
+
+        assertNotNull(banglish.getBirthRegistrationNumber());
+        assertEquals(banglish.getBirthRegistrationNumber().length(), 17);
+        assertEquals(banglish.getJonmnibondonNo().length(), 17);
+
+        assertNotNull(banglish.getSmartCardNumber());
+        assertEquals(banglish.getSmartCardNumber().length(), 10);
+        assertEquals(banglish.getSmartCardNo().length(), 10);
+
+        assertNotNull(banglish.getPassportNumber());
+        assertEquals(banglish.getPassportNumber().length(), 9);
+        assertEquals(banglish.getPassportNumber('A').length(), 9);
+        assertEquals(banglish.getPassordNo().length(), 9);
+
+        assertNotNull(banglish.getDrivingLicenseNumber());
+        assertEquals(banglish.getDrivingLicenseNumber().length(), 9);
+        assertEquals(banglish.getDrivingLicenseNumber("DK").length(), 9);
+        assertEquals(banglish.getDrivingLincenceId().length(), 9);
+        assertEquals(banglish.getDrivingLicenseId().length(), 9);
+
+        assertNotNull(banglish.getCitizenIdentification());
+        assertNotNull(banglish.getIdentification());
+        assertEquals(banglish.getCitizenIdentification().getNationalIdNumber().length(), 17);
     }
 }

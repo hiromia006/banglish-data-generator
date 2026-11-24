@@ -9,7 +9,7 @@ description: Build, test, document, run, and maintain a reusable Java library th
 
 **Project Name:** `banglish-data-generator` (Display: **Banglish Data Generator**)  
 **Root Folder:** `banglish-data-generator/`  
-**Current Implementation Status:** Complete & Verified (v1.0.0, 73/73 Tests Passing)
+**Current Implementation Status:** Complete & Verified (v1.0.0, 114/114 Tests Passing)
 
 ## Purpose
 
@@ -130,6 +130,46 @@ All 8 administrative divisions:
 7. Rangpur (8 districts)
 8. Mymensingh (4 districts)
 
+### 6. Bangladesh citizen identification & document number generation
+
+Generates authentic, standardized Bangladesh citizen identification numbers and official document identifiers for database seeding, test automation, and validation frameworks.
+
+#### Standardized Field Mapping Table
+
+| Your field name | Recommended Java field name | Description | Format & Specification |
+|---|---|---|---|
+| `nationalVoterNo` | `nationalIdNumber` | National ID (NID) Number | 17 digits (standard computerized: `YYYY` + 13 digits), 13 digits, or 10 digits |
+| `JonmnibondonNo` | `birthRegistrationNumber` | Birth Registration Number | 17 digits (BDRIS format: `YYYY` + 2d district + 2d upazila + 2d union + 7d serial) |
+| `smartCardNo` | `smartCardNumber` | Smart NID Card Number | 10 digits (first digit 1–9, followed by 9 digits) |
+| `passordNo` | `passportNumber` | Bangladesh Passport Number | 9 characters (1 uppercase series letter like `A`, `B`, `E`, `P` + 8 digits) |
+| `driving lincenceId` | `drivingLicenseNumber` | BRTA Driving Licence Number | 9 characters (2-letter BRTA circle code like `DK`, `CT`, `SY` + 7 digits) |
+
+Implements in `IdentificationGenerator.java`:
+
+- `getNationalIdNumber()` : Returns standard 17-digit computerized NID (birth year 1950–2006 + 13 numeric digits).
+- `getNationalIdNumber(int length)` : Supports 10, 13, or 17 digit formats. Throws `IllegalArgumentException` for unsupported lengths.
+- `getNationalVoterNo()` / `getNationalVoterNo(int length)` : Backward-compatible aliases for `getNationalIdNumber()`.
+- `getBirthRegistrationNumber()` : Returns strictly 17-digit BDRIS-compliant birth certificate number.
+- `getJonmnibondonNo()` : Backward-compatible alias for `getBirthRegistrationNumber()`.
+- `getSmartCardNumber()` : Returns 10-digit polymer Smart NID card number (`^[1-9][0-9]{9}$`).
+- `getSmartCardNo()` : Backward-compatible alias for `getSmartCardNumber()`.
+- `getPassportNumber()` : Returns 9-character MRP / e-Passport number (`^[A-Z][0-9]{8}$`).
+- `getPassportNumber(char series)` / `getPassportNumber(String series)` : Returns 9-character passport number for specific series letter (e.g. 'A', 'E').
+- `getPassordNo()` : Backward-compatible alias for `getPassportNumber()`.
+- `getDrivingLicenseNumber()` : Returns 9-character BRTA licence number (`^[A-Z]{2}[0-9]{7}$`).
+- `getDrivingLicenseNumber(String circleCode)` : Returns 9-character licence for specific 2-letter BRTA circle code (e.g. "DK" for Dhaka, "CT" for Chattogram).
+- `getDrivingLincenceId()` / `getDrivingLicenseId()` : Backward-compatible aliases for `getDrivingLicenseNumber()`.
+- `getCitizenIdentification()` / `getIdentification()` : Returns a complete `CitizenIdentification` POJO populated with all 5 standardized fields.
+
+#### Model Representation (`com.hiromia.banglish.model.CitizenIdentification`)
+
+A strongly-typed, immutable record holding all standardized citizen identification numbers:
+- `getNationalIdNumber()` (alias: `getNationalVoterNo()`)
+- `getBirthRegistrationNumber()` (alias: `getJonmnibondonNo()`)
+- `getSmartCardNumber()` (alias: `getSmartCardNo()`)
+- `getPassportNumber()` (alias: `getPassordNo()`)
+- `getDrivingLicenseNumber()` (alias: `getDrivingLincenceId()`)
+
 ## Architecture and File Structure
 
 ```text
@@ -144,14 +184,17 @@ banglish-data-generator/
 │   │   ├── PhoneGenerator.java           # Bangladesh phone & mobile
 │   │   ├── PostalCodeGenerator.java      # Verified 4-digit postal codes
 │   │   ├── LocationGenerator.java        # Divisions, districts, and cities
+│   │   ├── IdentificationGenerator.java  # Citizen identification & document numbers
 │   │   ├── model/
 │   │   │   ├── Division.java             # 8 administrative divisions enum
-│   │   │   └── District.java             # District entity
+│   │   │   ├── District.java             # District entity
+│   │   │   └── CitizenIdentification.java # Standardized citizen identification record
 │   │   └── data/
 │   │       ├── BanglishWords.java        # Vocabulary & templates
 │   │       ├── BangladeshiNames.java     # Names dataset
 │   │       ├── PhonePrefixes.java        # Mobile operator prefixes
-│   │       └── LocationData.java         # 64-district LGED/BPO dataset
+│   │       ├── LocationData.java         # 64-district LGED/BPO dataset
+│   │       └── IdentificationData.java   # BRTA circle codes & passport series
 │   └── test/java/com/hiromia/banglish/
 │       ├── BanglishGeneratorTest.java    # Integration & deterministic seeding
 │       ├── TextGeneratorTest.java        # Text bounds, validation & formatting
@@ -159,6 +202,7 @@ banglish-data-generator/
 │       ├── PhoneGeneratorTest.java       # Mobile formatting & prefixes
 │       ├── PostalCodeGeneratorTest.java  # Verified postal codes & lookup
 │       ├── LocationGeneratorTest.java    # Division & district relations
+│       ├── IdentificationGeneratorTest.java # NID, BRN, Smart card, Passport, BRTA licence
 │       └── ThreadSafetyTest.java         # Multi-threaded concurrent execution
 ├── build.gradle                          # Gradle build configuration
 ├── settings.gradle                       # Gradle project settings
@@ -241,7 +285,7 @@ Both build systems are fully configured and verified independently:
   mvn clean test package
   ```
 
-Test suite status: **73 tests executed, 0 failures, 0 errors, 0 skipped**.
+Test suite status: **114 tests executed, 0 failures, 0 errors, 0 skipped**.
 
 ### Local Publishing
 

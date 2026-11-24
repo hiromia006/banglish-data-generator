@@ -42,6 +42,23 @@ public class ThreadSafetyTest {
 
                     String district = banglish.getDistrict();
                     assertNotNull(district);
+
+                    String nid = banglish.getNationalIdNumber();
+                    assertEquals(nid.length(), 17);
+
+                    String brn = banglish.getBirthRegistrationNumber();
+                    assertEquals(brn.length(), 17);
+
+                    String smartCard = banglish.getSmartCardNumber();
+                    assertEquals(smartCard.length(), 10);
+
+                    String passport = banglish.getPassportNumber();
+                    assertEquals(passport.length(), 9);
+
+                    String dl = banglish.getDrivingLicenseNumber();
+                    assertEquals(dl.length(), 9);
+
+                    assertNotNull(banglish.getCitizenIdentification());
                 }
                 return null;
             }));

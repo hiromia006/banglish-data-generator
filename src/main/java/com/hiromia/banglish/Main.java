@@ -65,16 +65,32 @@ public class Main {
         System.out.println("Cities in Dhaka    : " + banglish.getCitiesByDistrict("Dhaka"));
         System.out.println();
 
-        // 6. Deterministic Seeding Demo
-        System.out.println("--- [6. Deterministic Seed Demo (Seed = 2026L)] ---");
+        // 6. Bangladesh Citizen Identification & Document Numbers
+        System.out.println("--- [6. Bangladesh Citizen Identification & Official Documents] ---");
+        System.out.println("National ID (17d)  : " + banglish.getNationalIdNumber() + " (field: nationalIdNumber / nationalVoterNo)");
+        System.out.println("National ID (10d)  : " + banglish.getNationalIdNumber(10));
+        System.out.println("National ID (13d)  : " + banglish.getNationalIdNumber(13));
+        System.out.println("Birth Reg No (17d) : " + banglish.getBirthRegistrationNumber() + " (field: birthRegistrationNumber / JonmnibondonNo)");
+        System.out.println("Smart Card No (10d): " + banglish.getSmartCardNumber() + " (field: smartCardNumber / smartCardNo)");
+        System.out.println("Passport No (9ch)  : " + banglish.getPassportNumber() + " (field: passportNumber / passordNo)");
+        System.out.println("Driving Licence    : " + banglish.getDrivingLicenseNumber() + " (field: drivingLicenseNumber / driving lincenceId)");
+        System.out.println("Dhaka Licence (DK) : " + banglish.getDrivingLicenseNumber("DK"));
+        System.out.println("Citizen POJO       : " + banglish.getCitizenIdentification());
+        System.out.println();
+
+        // 7. Deterministic Seeding Demo
+        System.out.println("--- [7. Deterministic Seed Demo (Seed = 2026L)] ---");
         Banglish seedA = BanglishGenerator.getInstance(2026L);
         Banglish seedB = BanglishGenerator.getInstance(2026L);
         System.out.println("Run A Sentence     : " + seedA.getSentence());
         System.out.println("Run B Sentence     : " + seedB.getSentence());
         System.out.println("Run A Mobile       : " + seedA.getMobileNumber());
         System.out.println("Run B Mobile       : " + seedB.getMobileNumber());
+        System.out.println("Run A NID (17d)    : " + seedA.getNationalIdNumber());
+        System.out.println("Run B NID (17d)    : " + seedB.getNationalIdNumber());
         System.out.println("Identical Outputs  : " + (seedA.getSentence().equals(seedB.getSentence())
-                && seedA.getMobileNumber().equals(seedB.getMobileNumber()) ? "YES (Verified)" : "NO"));
+                && seedA.getMobileNumber().equals(seedB.getMobileNumber())
+                && seedA.getNationalIdNumber().equals(seedB.getNationalIdNumber()) ? "YES (Verified)" : "NO"));
 
         System.out.println("\n================================================================================");
         System.out.println("            ALL BANGLISH GENERATORS EXECUTED SUCCESSFULLY!                      ");

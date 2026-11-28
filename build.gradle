@@ -3,7 +3,7 @@ plugins {
     id 'maven-publish'
 }
 
-group = 'com.hiromia'
+group = 'com.banglish.data.generator'
 version = '1.0.0'
 
 java {
@@ -43,7 +43,7 @@ jar {
         attributes(
             'Implementation-Title': 'Banglish Data Generator',
             'Implementation-Version': project.version,
-            'Main-Class': 'com.hiromia.banglish.Main'
+            'Main-Class': 'com.banglish.data.generator.Main'
         )
     }
 }
@@ -52,7 +52,7 @@ tasks.register('run', JavaExec) {
     group = 'application'
     description = 'Runs the demo application showing sample Banglish data.'
     classpath = sourceSets.main.runtimeClasspath
-    mainClass = 'com.hiromia.banglish.Main'
+    mainClass = 'com.banglish.data.generator.Main'
 }
 
 publishing {

@@ -32,7 +32,7 @@ Add the dependency to your `build.gradle`:
 
 ```groovy
 dependencies {
-    implementation 'com.hiromia:banglish-data-generator:1.0.0'
+    implementation 'com.banglish.data.generator:banglish-data-generator:1.0.0'
 }
 ```
 
@@ -42,7 +42,7 @@ Add the dependency to your `pom.xml`:
 
 ```xml
 <dependency>
-    <groupId>com.hiromia</groupId>
+    <groupId>com.banglish.data.generator</groupId>
     <artifactId>banglish-data-generator</artifactId>
     <version>1.0.0</version>
 </dependency>
@@ -53,8 +53,8 @@ Add the dependency to your `pom.xml`:
 ## Quick Start
 
 ```java
-import com.hiromia.banglish.Banglish;
-import com.hiromia.banglish.BanglishGenerator;
+import com.banglish.data.generator.Banglish;
+import com.banglish.data.generator.BanglishGenerator;
 
 public class QuickStart {
     public static void main(String[] args) {
@@ -267,8 +267,8 @@ assert gen1.getMobileNumber().equals(gen2.getMobileNumber());
 
 ```java
 import io.restassured.RestAssured;
-import com.hiromia.banglish.Banglish;
-import com.hiromia.banglish.BanglishGenerator;
+import com.banglish.data.generator.Banglish;
+import com.banglish.data.generator.BanglishGenerator;
 import org.testng.annotations.Test;
 import java.util.Map;
 
@@ -300,8 +300,8 @@ class UserApiTest {
 
 ```java
 import com.microsoft.playwright.*;
-import com.hiromia.banglish.Banglish;
-import com.hiromia.banglish.BanglishGenerator;
+import com.banglish.data.generator.Banglish;
+import com.banglish.data.generator.BanglishGenerator;
 
 public class RegistrationE2ETest {
     public static void main(String[] args) {
@@ -419,10 +419,10 @@ Before publishing to Maven Central via Sonatype OSSRH / Central Portal:
 
 - [x] Java 17+ compliant bytecode.
 - [x] Complete Javadoc and Source JAR generation.
-- [x] Standard POM metadata: Group ID (`com.hiromia`), Artifact ID (`banglish-data-generator`), Version, Name, Description, URL, License, Developers, SCM.
+- [x] Standard POM metadata: Group ID (`com.banglish.data.generator`), Artifact ID (`banglish-data-generator`), Version, Name, Description, URL, License, Developers, SCM.
 - [x] Zero unapproved third-party dependencies.
 - [ ] GPG signature verification: configure `maven-gpg-plugin` or `gradle-signing-plugin` with valid signing key.
-- [ ] Sonatype Central Portal account & namespace verification for `com.hiromia`.
+- [ ] Sonatype Central Portal account & namespace verification for `com.banglish.data.generator`.
 
 ---
 

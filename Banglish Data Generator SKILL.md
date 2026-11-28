@@ -40,12 +40,12 @@ Use `mdeanda/lorem` to study Java library API design, project structure, generat
 ## Verified project coordinates
 
 - Project name: `banglish-data-generator`
-- Group ID: `com.hiromia`
+- Group ID: `com.banglish.data.generator`
 - Artifact ID: `banglish-data-generator`
 - Current version: `1.0.0`
-- Base package: `com.hiromia.banglish`
+- Base package: `com.banglish.data.generator`
 - Java compatibility: 17+
-- Main Class: `com.hiromia.banglish.Main`
+- Main Class: `com.banglish.data.generator.Main`
 
 ## Implemented capabilities
 
@@ -164,7 +164,7 @@ Implements in `IdentificationGenerator.java`:
 - `getDrivingLincenceId()` / `getDrivingLicenseId()` : Backward-compatible aliases for `getDrivingLicenseNumber()`.
 - `getCitizenIdentification()` / `getIdentification()` : Returns a complete `CitizenIdentification` POJO populated with all 5 standardized fields.
 
-#### Model Representation (`com.hiromia.banglish.model.CitizenIdentification`)
+#### Model Representation (`com.banglish.data.generator.model.CitizenIdentification`)
 
 A strongly-typed, immutable record holding all standardized citizen identification numbers:
 - `getNationalIdNumber()` (alias: `getNationalVoterNo()`)
@@ -178,7 +178,7 @@ A strongly-typed, immutable record holding all standardized citizen identificati
 ```text
 banglish-data-generator/
 ├── src/
-│   ├── main/java/com/hiromia/banglish/
+│   ├── main/java/com/banglish/data/generator/
 │   │   ├── Banglish.java                 # Public API interface
 │   │   ├── BanglishGenerator.java        # Main facade & thread-safe singleton
 │   │   ├── Main.java                     # Executable demonstration entrypoint
@@ -198,7 +198,7 @@ banglish-data-generator/
 │   │       ├── PhonePrefixes.java        # Mobile operator prefixes
 │   │       ├── LocationData.java         # 64-district LGED/BPO dataset
 │   │       └── IdentificationData.java   # BRTA circle codes & passport series
-│   └── test/java/com/hiromia/banglish/
+│   └── test/java/com/banglish/data/generator/
 │       ├── BanglishGeneratorTest.java    # Integration & deterministic seeding
 │       ├── TextGeneratorTest.java        # Text bounds, validation & formatting
 │       ├── NameGeneratorTest.java        # Name patterns
@@ -304,14 +304,14 @@ Test suite status: **114 tests executed, 0 failures, 0 errors, 0 skipped**.
 Installed artifact coordinates:
 ```xml
 <dependency>
-    <groupId>com.hiromia</groupId>
+    <groupId>com.banglish.data.generator</groupId>
     <artifactId>banglish-data-generator</artifactId>
     <version>1.0.0</version>
 </dependency>
 ```
 
 ```groovy
-implementation 'com.hiromia:banglish-data-generator:1.0.0'
+implementation 'com.banglish.data.generator:banglish-data-generator:1.0.0'
 ```
 
 ## Maven Central Publishing Checklist
@@ -321,4 +321,4 @@ implementation 'com.hiromia:banglish-data-generator:1.0.0'
 - [x] Complete POM metadata (URL, licenses, developers, SCM, description).
 - [x] Zero external runtime dependencies.
 - [ ] Sign artifacts using GPG (`maven-gpg-plugin` / `gradle-signing-plugin`).
-- [ ] Sonatype Central Portal namespace claim for `com.hiromia`.
+- [ ] Sonatype Central Portal namespace claim for `com.banglish.data.generator`.
